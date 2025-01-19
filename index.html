@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Filipinolohiya AR</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    #menu {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+    button {
+      margin: 5px 0;
+      padding: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu">
+    <button onclick="changeImage('pic1.jpg')">Picture 1</button>
+    <button onclick="changeImage('pic2.jpg')">Picture 2</button>
+    <button onclick="changeImage('pic3.jpg')">Picture 3</button>
+    <button onclick="changeImage('pic4.jpg')">Picture 4</button>
+    <button onclick="changeImage('pic5.jpg')">Picture 5</button>
+    <button onclick="changeImage('pic6.jpg')">Picture 6</button>
+    <button onclick="changeImage('pic7.png')">Picture 7</button>
+  </div>
+
+  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    <!-- Marker for tracking -->
+    <a-marker type="pattern" url="pattern-hiro.patt">
+      <!-- Plane to display the image -->
+      <a-plane id="imagePlane" position="0 0 0" rotation="-90 0 0" width="2" height="1.25" material="shader: flat; src:pic1.jpg"></a-plane>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script>
+    function changeImage(imageSrc) {
+      // Get the plane element
+      const imagePlane = document.getElementById('imagePlane');
+      // Update the 'src' attribute of the material to the selected image
+      imagePlane.setAttribute('material', 'src', imageSrc);
+    }
+  </script>
+</body>
+</html>
